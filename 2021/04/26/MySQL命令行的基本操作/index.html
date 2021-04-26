@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>MySQL命令行的基本操作 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码 3、创建数据库 create database if not exists name; 4、查询数据库 show databases; 5、删除数据">
+  <meta name="description" content="1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码 3、创建数据库 create database if not exists 数据库名; 4、查询数据库 show databases; 5、删除数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL命令行的基本操作">
 <meta property="og:url" content="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码 3、创建数据库 create database if not exists name; 4、查询数据库 show databases; 5、删除数据">
+<meta property="og:description" content="1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码 3、创建数据库 create database if not exists 数据库名; 4、查询数据库 show databases; 5、删除数据">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-26T04:44:38.621Z">
-<meta property="article:modified_time" content="2021-04-26T05:43:54.265Z">
+<meta property="article:modified_time" content="2021-04-26T05:55:43.659Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -184,19 +184,19 @@
 <p>连接到本机上的MySQL：mysql -u 用户名 -p</p>
 <p>连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码</p>
 <p>3、创建数据库</p>
-<p>create database if not exists name;</p>
+<p>create database if not exists 数据库名;</p>
 <p>4、查询数据库</p>
 <p>show databases;</p>
 <p>5、删除数据库</p>
-<p>drop database if exists name;</p>
+<p>drop database if exists 数据库名;</p>
 <p>6、使用某个数据库</p>
-<p>use name;</p>
+<p>use 数据库名;</p>
 <p>7、显示表</p>
 <p>show tables;</p>
 <p>8、显示某个表的数据结构</p>
-<p>desc name;</p>
-<p>9、显示某个表中的所有记录</p>
-<p>select * from name;</p>
+<p>desc 表名;</p>
+<p>9、显示某个表的所有记录</p>
+<p>select * from 表名;</p>
 <p>10、创建表</p>
 <p>例：创建选课表，</p>
 <p>字段名：sno，数据类型：char(2)，约束：主键、非空，注释：学号；</p>
@@ -209,13 +209,12 @@
 <p>primary key(sno,cno)</p>
 <p>);</p>
 <p>11、删除表</p>
-<p>drop table name;</p>
+<p>drop table 表名;</p>
 <p>12、修改数据表名</p>
-<p>alter table 旧名 rename to 新名;</p>
+<p>alter table 旧表名 rename to 新表名;</p>
 <p>13、修改字段名</p>
 <p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
 <p>14、修改字段类型</p>
-<p>可修改的：字段类型、类型长度、默认值、注释</p>
 <p>例：对某字段进行修改          /column可以省略</p>
 <p>alter table 表名 modify column 字段名 新数据类型 新类型长度 新默认值 新注释;</p>
 <p>15、添加数据表字段</p>
