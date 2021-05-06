@@ -16,7 +16,7 @@
 <meta property="og:description" content="MySQL必知必会：https:&#x2F;&#x2F;wwe.lanzous.com&#x2F;iYYaNov08dg  &#x2F;&#x2F; 此为本书下载链接 &#x2F;&#x2F; 以下教程具有一定局限性，请灵活组合命令进行输出。 1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-26T04:44:38.621Z">
-<meta property="article:modified_time" content="2021-05-06T09:37:00.146Z">
+<meta property="article:modified_time" content="2021-05-06T14:21:54.590Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -224,8 +224,10 @@
 <p>16、删除数据表字段</p>
 <p>alter table 表名 drop 字段名;</p>
 <p>17、修改字段排序</p>
-<p>alter table 表名 modify 字段名 数据类型 first;  // 将此字段提到数据表最前</p>
-<p>alter table 表名 modify 字段名 数据类型 after 字段名;  // 将某字段排在指定字段之后</p>
+<p>// 将此字段提到字段列表最前</p>
+<p>alter table 表名 modify 字段名 数据类型 first;  </p>
+<p>// 将此字段排在指定字段之后</p>
+<p>alter table 表名 modify 字段名 数据类型 after 字段名;  </p>
 <p>18、显示存储引擎</p>
 <p>show engines;</p>
 <p>21、更改存储引擎</p>
@@ -237,17 +239,54 @@
 <p>24、部分拷贝数据表</p>
 <p>create table if not exists 新数据表名 as select 字段名,字段名 from 被拷贝的数据表名;</p>
 <p>// 参考教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">MySQL中快速复制数据表方法汇总 - 我曾如此奢望 - 博客园 (cnblogs.com)</a></p>
-<p>25、主键约束</p>
+<p>25、查看索引</p>
+<p>show index from 表名；</p>
+<p>26、查看表中的约束</p>
+<p>show create table 表名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7364.html">MySQL查看索引（SHOW INDEX） (biancheng.net)</a></p>
+<p>27、非空约束</p>
+<p>// 创建表时设置非空约束</p>
+<p>create table 表名(字段名 数据类型 not null);</p>
+<p>// 修改表时添加非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 not null;</p>
+<p>// 删除非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2448.html">MySQL非空约束（NOT NULL） (biancheng.net)</a></p>
+<p>28、唯一约束</p>
+<p>// 创建表时设置唯一约束</p>
+<p>create table 表名(字段名 数据类型 not null unique );</p>
+<p>// 修改表时添加唯一约束</p>
+<p>alter table 表名 add constraint 唯一约束名 unique(字段名);</p>
+<p>// 删除唯一约束</p>
+<p>alter table 表名 drop index 唯一约束名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2445.html">MySQL唯一约束（UNIQUE KEY） (biancheng.net)</a></p>
+<p>29、默认约束</p>
+<p>// 创建表时设置默认约束</p>
+<p>create table 表名(字段名 数据类型 default ‘默认值’);</p>
+<p>// 修改表时添加默认约束</p>
+<p>alter table 表名 change column 字段名 数据类型 default ‘默认值’;</p>
+<p>// 删除默认约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 default null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2447.html">MySQL默认值（DEFAULT） (biancheng.net)</a></p>
+<p>30、主键约束</p>
+<p>// 创建表时设置主键约束</p>
 <p>① create table 表名(字段名 数据类型 primary key);</p>
 <p>② create table 表名(字段名 数据类型 ,primary key(主码));</p>
-<p>26、组合主键约束</p>
-<p>create table 表名(字段名 数据类型,primary key(主码,主码));</p>
-<p>27、删除主键约束</p>
+<p>// 组合主键约束</p>
+<p>③ create table 表名(字段名 数据类型,primary key(主码,主码));</p>
+<p>// 添加主键约束</p>
+<p>alter table 表名 add primary key(主码);</p>
+<p>// 修改主键约束</p>
+<p>alter table 表名 drop primary key,add primary key(主码);</p>
+<p>// 删除主键约束</p>
 <p>alter table 表名 drop primary key;</p>
-<p>28、添加主键约束</p>
-<p>① alter table 表名 add primary key(主码);</p>
-<p>② alter table 表名 drop primary key,add primary key(主码);</p>
-<p>29、外键约束</p>
+<p>// 参考教程：</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2440.html">MySQL主键（PRIMARY KEY） (biancheng.net)</a></p>
+<p>31、自增约束</p>
+<p>// 创建表时设置自增约束</p>
+<p>create table 表名(字段名 数据类型 约束条件 auto_increment);</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7624.html">MySQL AUTO_INCREMENT：主键自增长 (biancheng.net)</a></p>
+<p>32、外键约束</p>
 <p>定义外键时，需要遵守下列规则：</p>
 <ul>
 <li>主表必须已经存在于数据库中，或者是当前正在创建的表。如果是后一种情况，则主表与从表是同一个表，这样的表称为自参照表，这种结构称为自参照完整性。</li>
@@ -262,6 +301,8 @@
 <p>create table 表名(字段名 数据类型,字段名 数据类型,主键约束,constraint 约束条件名 foreign key(字段名) references 表名(主表主码));</p>
 <p>// 修改表时添加外键约束</p>
 <p>alter table 表名 add foreign key(主码) references 表名(主码) on update 级联选项值 on delete 级联选项值; </p>
+<p>// 删除外键约束</p>
+<p>alter table 表名 drop foreign key 外键约束名;</p>
 <p>// 参考教程：</p>
 <p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2441.html">MySQL外键约束（FOREIGN KEY） (biancheng.net)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yzuzhang/p/5174720.html">MySql 外键约束 之CASCADE、SET NULL、RESTRICT、NO ACTION分析和作用 - yzuzhang - 博客园 (cnblogs.com)</a></p>
