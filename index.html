@@ -196,7 +196,7 @@
 <p>9、显示表的所有字段</p>
 <p>select * from 表名;</p>
 <p>10、创建表</p>
-<p>例：创建选课表</p>
+<p>例：创建表SC（选课表）</p>
 <p>字段名：sno，数据类型：char(2)，约束：主键、非空，注释：学号；</p>
 <p>字段名：cno，数据类型：char(2)，约束：主键、非空，注释：课程号；</p>
 <p>字段名：score，数据类型：tinyint(4)，注释：成绩；</p>
@@ -210,7 +210,7 @@
 <p>drop table 表名;</p>
 <p>12、修改字段名</p>
 <p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
-<p>13、修改数据表名</p>
+<p>13、修改表名</p>
 <p>alter table 旧表名 rename to 新表名;</p>
 <p>14、修改字段类型</p>
 <p>例：对某字段进行修改                           /column可以省略</p>
@@ -219,6 +219,20 @@
 <p>alter table 表名 add 字段名 数据类型;</p>
 <p>16、删除数据表字段</p>
 <p>alter table 表名 drop 字段名;</p>
+<p>17、修改字段排序</p>
+<p>alter table 表名 modify 字段名 数据类型 first;  // 将此字段提到数据表最前</p>
+<p>alter table 表名 modify 字段名 数据类型 after 字段名;  // 将某字段排在指定字段之后</p>
+<p>18、显示存储引擎</p>
+<p>show engines;</p>
+<p>21、更改存储引擎</p>
+<p>alter table 数据表名 engine=存储引擎;</p>
+<p>22、显示表使用的存储引擎</p>
+<p>show create table 数据表名;</p>
+<p>23、完全拷贝数据表</p>
+<p>create table if not exists 新数据表名 like 被拷贝的数据表名;</p>
+<p>24、部分拷贝数据表</p>
+<p>create table if not exists 新数据表名 as select 字段名,字段名 from 被拷贝的数据表名;</p>
+<p>// 参考教程：(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">https://www.cnblogs.com/smartyman/p/3813999.html</a>)</p>
 
       
 
