@@ -210,10 +210,10 @@
 <p>);</p>
 <p>11、删除表</p>
 <p>drop table 表名;</p>
-<p>12、修改字段名</p>
-<p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
-<p>13、修改表名</p>
+<p>12、修改表名</p>
 <p>alter table 旧表名 rename to 新表名;</p>
+<p>13、修改字段名</p>
+<p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
 <p>14、修改字段类型</p>
 <p>例：对某字段进行修改   //column可以省略</p>
 <p>alter table 表名 modify column 字段名 新数据类型 新类型长度 新默认值 新注释;</p>
@@ -304,6 +304,14 @@
 <p>// 参考教程：</p>
 <p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2441.html">MySQL外键约束（FOREIGN KEY） (biancheng.net)</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yzuzhang/p/5174720.html">MySql 外键约束 之CASCADE、SET NULL、RESTRICT、NO ACTION分析和作用 - yzuzhang - 博客园 (cnblogs.com)</a></p>
+<p>33、插入数据</p>
+<p>insert into 表名(字段名1,字段名2…) values(值1,值2…);<br>insert into 表名 values(值1,值2…);</p>
+<p>34、更新数据</p>
+<p>update 表名 set 字段名1=值1,字段名2=值2… where 条件表达式;</p>
+<p>35、删除数据</p>
+<p>delete from 表名 where 条件表达式;</p>
+<p>36、查询数据</p>
+<p>select * from 表名;<br>select 字段名1,字段名2 from 表名;</p>
 
       
 
