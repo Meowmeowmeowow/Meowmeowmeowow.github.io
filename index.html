@@ -195,7 +195,7 @@
 <p>show tables;</p>
 <p>8、显示表的数据结构</p>
 <p>desc 表名;</p>
-<p>9、显示表的所有字段</p>
+<p>9、显示表的所有记录</p>
 <p>select * from 表名;</p>
 <p>10、创建表</p>
 <p>例：创建表SC（选课表）</p>
@@ -215,7 +215,7 @@
 <p>13、修改表名</p>
 <p>alter table 旧表名 rename to 新表名;</p>
 <p>14、修改字段类型</p>
-<p>例：对某字段进行修改                           /column可以省略</p>
+<p>例：对某字段进行修改   //column可以省略</p>
 <p>alter table 表名 modify column 字段名 新数据类型 新类型长度 新默认值 新注释;</p>
 <p>15、添加数据表字段</p>
 <p>alter table 表名 add 字段名 数据类型;</p>
@@ -234,7 +234,35 @@
 <p>create table if not exists 新数据表名 like 被拷贝的数据表名;</p>
 <p>24、部分拷贝数据表</p>
 <p>create table if not exists 新数据表名 as select 字段名,字段名 from 被拷贝的数据表名;</p>
-<p>// 参考教程：(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">https://www.cnblogs.com/smartyman/p/3813999.html</a>)</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">MySQL中快速复制数据表方法汇总 - 我曾如此奢望 - 博客园 (cnblogs.com)</a></p>
+<p>25、主键约束</p>
+<p>① create table 表名(字段名 数据类型 primary key);</p>
+<p>② create table 表名(字段名 数据类型 ,primary key(主码));</p>
+<p>26、组合主键约束</p>
+<p>create table 表名(字段名 数据类型,primary key(主码,主码));</p>
+<p>27、删除主键约束</p>
+<p>alter table 表名 drop primary key;</p>
+<p>28、添加主键约束</p>
+<p>① alter table 表名 add primary key(主码);</p>
+<p>② alter table 表名 drop primary key,add primary key(主码);</p>
+<p>29、外键约束</p>
+<p>定义外键时，需要遵守下列规则：</p>
+<ul>
+<li>主表必须已经存在于数据库中，或者是当前正在创建的表。如果是后一种情况，则主表与从表是同一个表，这样的表称为自参照表，这种结构称为自参照完整性。</li>
+<li>必须为主表定义主键。</li>
+<li>主键不能包含空值，但允许在外键中出现空值。也就是说，只要外键的每个非空值出现在指定的主键中，这个外键的内容就是正确的。</li>
+<li>在主表的表名后面指定列名或列名的组合。这个列或列的组合必须是主表的主键或候选键。</li>
+<li>外键中列的数目必须和主表的主键中列的数目相同。</li>
+<li>外键中列的数据类型必须和主表主键中对应列的数据类型相同。</li>
+</ul>
+<p>// 级联选项取值：cascade     set null     no action     restrict</p>
+<p>// 创建表时设置外键约束</p>
+<p>create table 表名(字段名 数据类型,字段名 数据类型,主键约束,constraint 约束条件名 foreign key(字段名) references 表名(主表主码));</p>
+<p>// 修改表时添加外键约束</p>
+<p>alter table 表名 add foreign key(主码) references 表名(主码) on update 级联选项值 on delete 级联选项值; </p>
+<p>// 参考教程：</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2441.html">MySQL外键约束（FOREIGN KEY） (biancheng.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yzuzhang/p/5174720.html">MySql 外键约束 之CASCADE、SET NULL、RESTRICT、NO ACTION分析和作用 - yzuzhang - 博客园 (cnblogs.com)</a></p>
 
       
 
