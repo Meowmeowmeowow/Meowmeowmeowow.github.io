@@ -1,32 +1,278 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL命令行实用程序 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL必知必会：https:&#x2F;&#x2F;wwe.lanzous.com&#x2F;iYYaNov08dg  &#x2F;&#x2F; 此书下载链接 &#x2F;&#x2F; 以下教程具有一定局限性，请灵活组合命令进行输出。 1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL命令行实用程序">
+<meta property="og:url" content="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySQL必知必会：https:&#x2F;&#x2F;wwe.lanzous.com&#x2F;iYYaNov08dg  &#x2F;&#x2F; 此书下载链接 &#x2F;&#x2F; 以下教程具有一定局限性，请灵活组合命令进行输出。 1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-04-26T04:44:38.621Z">
+<meta property="article:modified_time" content="2021-05-08T06:14:11.606Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL命令行实用程序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-08 14:14:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-    if theme.reward.enable
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
-      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL命令行实用程序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-04-26T04:44:38.621Z" title="Created 2021-04-26 12:44:38">2021-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-05-08T06:14:11.606Z" title="Updated 2021-05-08 14:14:11">2021-05-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL命令行实用程序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>MySQL必知必会：<a target="_blank" rel="noopener" href="https://wwe.lanzous.com/iYYaNov08dg">https://wwe.lanzous.com/iYYaNov08dg</a>  // 此书下载链接</p>
+<p>// 以下教程具有一定局限性，请灵活组合命令进行输出。</p>
+<p>1、修改密码</p>
+<p>mysqladmin -u 用户名 -p旧密码 password 新密码</p>
+<p>2、连接MySQL</p>
+<p>连接到本机上的MySQL：mysql -u 用户名 -p</p>
+<p>连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码  </p>
+<p>3、创建数据库</p>
+<p>create database if not exists 数据库名;</p>
+<p>4、显示数据库</p>
+<p>show databases;</p>
+<p>5、删除数据库</p>
+<p>drop database if exists 数据库名;</p>
+<p>6、选择数据库</p>
+<p>use 数据库名;</p>
+<p>7、显示表</p>
+<p>show tables;</p>
+<p>8、显示表的数据结构</p>
+<p>desc 表名;</p>
+<p>9、显示表的所有记录</p>
+<p>select * from 表名;</p>
+<p>10、创建表</p>
+<p>例：创建表SC（选课表）</p>
+<p>字段名：sno，数据类型：char(2)，约束：主键、非空，注释：学号；</p>
+<p>字段名：cno，数据类型：char(2)，约束：主键、非空，注释：课程号；</p>
+<p>字段名：score，数据类型：tinyint(4)，注释：成绩；</p>
+<p>create table if not exists SC(</p>
+<p>sno char(2) not null comment ‘学号’,</p>
+<p>cno char(2) not null comment ‘课程号’,</p>
+<p>score tinyint(4) comment ‘成绩’,</p>
+<p>primary key(sno,cno)</p>
+<p>);</p>
+<p>11、删除表</p>
+<p>drop table 表名;</p>
+<p>12、修改表名</p>
+<p>alter table 旧表名 rename to 新表名;</p>
+<p>13、修改字段名</p>
+<p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
+<p>14、修改字段类型</p>
+<p>例：对某字段进行修改   //column可以省略</p>
+<p>alter table 表名 modify column 字段名 新数据类型 新类型长度 新默认值 新注释;</p>
+<p>15、添加数据表字段</p>
+<p>alter table 表名 add 字段名 数据类型;</p>
+<p>16、删除数据表字段</p>
+<p>alter table 表名 drop 字段名;</p>
+<p>17、修改字段排序</p>
+<p>// 将此字段提到字段列表最前</p>
+<p>alter table 表名 modify 字段名 数据类型 first;  </p>
+<p>// 将此字段排在指定字段之后</p>
+<p>alter table 表名 modify 字段名 数据类型 after 字段名;  </p>
+<p>18、显示存储引擎</p>
+<p>show engines;</p>
+<p>19、更改存储引擎</p>
+<p>alter table 数据表名 engine=存储引擎;</p>
+<p>20、显示表使用的存储引擎</p>
+<p>show create table 数据表名;</p>
+<p>21、完全拷贝数据表</p>
+<p>create table if not exists 新数据表名 like 被拷贝的数据表名;</p>
+<p>22、部分拷贝数据表</p>
+<p>create table if not exists 新数据表名 as select 字段名,字段名 from 被拷贝的数据表名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">MySQL中快速复制数据表方法汇总 - 我曾如此奢望 - 博客园 (cnblogs.com)</a></p>
+<p>23、查看索引</p>
+<p>show index from 表名；</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7364.html">MySQL查看索引（SHOW INDEX） (biancheng.net)</a></p>
+<p>24、查看表中的约束</p>
+<p>show create table 表名;</p>
+<p>25、非空约束</p>
+<p>// 创建表时设置非空约束</p>
+<p>create table 表名(字段名 数据类型 not null);</p>
+<p>// 修改表时添加非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 not null;</p>
+<p>// 删除非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2448.html">MySQL非空约束（NOT NULL） (biancheng.net)</a></p>
+<p>26、唯一约束</p>
+<p>// 创建表时设置唯一约束</p>
+<p>create table 表名(字段名 数据类型 not null unique );</p>
+<p>// 修改表时添加唯一约束</p>
+<p>alter table 表名 add constraint 唯一约束名 unique(字段名);</p>
+<p>// 删除唯一约束</p>
+<p>alter table 表名 drop index 唯一约束名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2445.html">MySQL唯一约束（UNIQUE KEY） (biancheng.net)</a></p>
+<p>27、默认约束</p>
+<p>// 创建表时设置默认约束</p>
+<p>create table 表名(字段名 数据类型 default ‘默认值’);</p>
+<p>// 修改表时添加默认约束</p>
+<p>alter table 表名 change column 字段名 数据类型 default ‘默认值’;</p>
+<p>// 删除默认约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 default null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2447.html">MySQL默认值（DEFAULT） (biancheng.net)</a></p>
+<p>28、主键约束</p>
+<p>// 创建表时设置主键约束</p>
+<p>① create table 表名(字段名 数据类型 primary key);</p>
+<p>② create table 表名(字段名 数据类型 ,primary key(主码));</p>
+<p>// 组合主键约束</p>
+<p>③ create table 表名(字段名 数据类型,primary key(主码,主码));</p>
+<p>// 添加主键约束</p>
+<p>alter table 表名 add primary key(主码);</p>
+<p>// 修改主键约束</p>
+<p>alter table 表名 drop primary key,add primary key(主码);</p>
+<p>// 删除主键约束</p>
+<p>alter table 表名 drop primary key;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2440.html">MySQL主键（PRIMARY KEY） (biancheng.net)</a></p>
+<p>29、自增约束</p>
+<p>// 创建表时设置自增约束</p>
+<p>create table 表名(字段名 数据类型 约束条件 auto_increment);</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7624.html">MySQL AUTO_INCREMENT：主键自增长 (biancheng.net)</a></p>
+<p>30、外键约束</p>
+<p>定义外键时，需要遵守下列规则：</p>
+<ul>
+<li>主表必须已经存在于数据库中，或者是当前正在创建的表。如果是后一种情况，则主表与从表是同一个表，这样的表称为自参照表，这种结构称为自参照完整性。</li>
+<li>必须为主表定义主键。</li>
+<li>主键不能包含空值，但允许在外键中出现空值。也就是说，只要外键的每个非空值出现在指定的主键中，这个外键的内容就是正确的。</li>
+<li>在主表的表名后面指定列名或列名的组合。这个列或列的组合必须是主表的主键或候选键。</li>
+<li>外键中列的数目必须和主表的主键中列的数目相同。</li>
+<li>外键中列的数据类型必须和主表主键中对应列的数据类型相同。</li>
+</ul>
+<p>// 级联选项取值：cascade、set null、no action、restrict</p>
+<p>// 创建表时设置外键约束</p>
+<p>create table 表名(字段名 数据类型,字段名 数据类型,主键约束,constraint 约束条件名 foreign key(字段名) references 表名(主表主码));</p>
+<p>// 修改表时添加外键约束</p>
+<p>alter table 表名 add foreign key(主码) references 表名(主码) on update 级联选项值 on delete 级联选项值; </p>
+<p>// 删除外键约束</p>
+<p>alter table 表名 drop foreign key 外键约束名;</p>
+<p>// 参考教程：</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2441.html">MySQL外键约束（FOREIGN KEY） (biancheng.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yzuzhang/p/5174720.html">MySql 外键约束 之CASCADE、SET NULL、RESTRICT、NO ACTION分析和作用 - yzuzhang - 博客园 (cnblogs.com)</a></p>
+<p>31、插入数据</p>
+<p>insert into 表名(字段名1,字段名2…) values(值1,值2…);<br>insert into 表名 values(值1,值2…);</p>
+<p>32、更新数据</p>
+<p>update 表名 set 字段名1=值1,字段名2=值2… where 条件表达式;</p>
+<p>33、删除数据</p>
+<p>delete from 表名 where 条件表达式;</p>
+<p>34、查询数据</p>
+<p>select * from 表名;<br>select 字段名1,字段名2 from 表名;</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/">http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/04/25/Look_this_way/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Look this way</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/" title="MySQL命令行实用程序"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL命令行实用程序"/></a><div class="content"><a class="title" href="/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/" title="MySQL命令行实用程序">MySQL命令行实用程序</a><time datetime="2021-04-26T04:44:38.621Z" title="Created 2021-04-26 12:44:38">2021-04-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/04/25/Look_this_way/" title="Look this way"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Look this way"/></a><div class="content"><a class="title" href="/2021/04/25/Look_this_way/" title="Look this way">Look this way</a><time datetime="2021-04-25T10:20:06.990Z" title="Created 2021-04-25 18:20:06">2021-04-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
