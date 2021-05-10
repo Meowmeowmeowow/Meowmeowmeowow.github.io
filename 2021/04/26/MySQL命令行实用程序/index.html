@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL命令行实用程序 | Nan's Blog</title><meta name="keywords" content="MySQL工具,必知必会"><meta name="author" content="Nan"><meta name="copyright" content="Nan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL必知必会：https:&#x2F;&#x2F;wwe.lanzous.com&#x2F;iYYaNov08dg  &#x2F;&#x2F; 此书下载链接 &#x2F;&#x2F; 以下教程具有一定局限性，请灵活组合命令进行输出。 1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL命令行实用程序">
+<meta property="og:url" content="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Nan&#39;s Blog">
+<meta property="og:description" content="MySQL必知必会：https:&#x2F;&#x2F;wwe.lanzous.com&#x2F;iYYaNov08dg  &#x2F;&#x2F; 此书下载链接 &#x2F;&#x2F; 以下教程具有一定局限性，请灵活组合命令进行输出。 1、修改密码 mysqladmin -u 用户名 -p旧密码 password 新密码 2、连接MySQL 连接到本机上的MySQL：mysql -u 用户名 -p 连接到远程主机上MySQL：mysql -h 主机地址 -u 用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://riyugo.com/o/210508/x623hw.png">
+<meta property="article:published_time" content="2021-04-26T04:44:38.621Z">
+<meta property="article:modified_time" content="2021-05-10T03:11:44.199Z">
+<meta property="article:author" content="Nan">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://riyugo.com/o/210508/x623hw.png"><link rel="shortcut icon" href="https://riyugo.com/o/210508/srzked.png"><link rel="canonical" href="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL命令行实用程序',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-05-10 11:11:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Nan's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://riyugo.com/o/210508/snbrni.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://riyugo.com/o/210508/x623hw.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Nan's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL命令行实用程序</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-26T04:44:38.621Z" title="发表于 2021-04-26 12:44:38">2021-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-10T03:11:44.199Z" title="更新于 2021-05-10 11:11:44">2021-05-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL命令行实用程序"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>MySQL必知必会：<a target="_blank" rel="noopener" href="https://wwe.lanzous.com/iYYaNov08dg">https://wwe.lanzous.com/iYYaNov08dg</a>  // 此书下载链接</p>
+<p>// 以下教程具有一定局限性，请灵活组合命令进行输出。</p>
+<p>1、修改密码</p>
+<p>mysqladmin -u 用户名 -p旧密码 password 新密码</p>
+<p>2、连接MySQL</p>
+<p>连接到本机上的MySQL：mysql -u 用户名 -p</p>
+<p>连接到远程主机上MySQL：mysql -h 主机地址 -u 用户名 -p 用户密码  </p>
+<p>3、创建数据库</p>
+<p>create database if not exists 数据库名;</p>
+<p>4、显示数据库</p>
+<p>show databases;</p>
+<p>5、删除数据库</p>
+<p>drop database if exists 数据库名;</p>
+<p>6、选择数据库</p>
+<p>use 数据库名;</p>
+<p>7、显示表</p>
+<p>show tables;</p>
+<p>8、显示表的数据结构</p>
+<p>desc 表名;</p>
+<p>9、显示表的所有记录</p>
+<p>select * from 表名;</p>
+<p>10、创建表</p>
+<p>例：创建表SC（选课表）</p>
+<p>字段名：sno，数据类型：char(2)，约束：主键、非空，注释：学号；</p>
+<p>字段名：cno，数据类型：char(2)，约束：主键、非空，注释：课程号；</p>
+<p>字段名：score，数据类型：tinyint(4)，注释：成绩；</p>
+<p>create table if not exists SC(</p>
+<p>sno char(2) not null comment ‘学号’,</p>
+<p>cno char(2) not null comment ‘课程号’,</p>
+<p>score tinyint(4) comment ‘成绩’,</p>
+<p>primary key(sno,cno)</p>
+<p>);</p>
+<p>11、删除表</p>
+<p>drop table 表名;</p>
+<p>12、修改表名</p>
+<p>alter table 旧表名 rename to 新表名;</p>
+<p>13、修改字段名</p>
+<p>alter table 表名 change 旧字段名 新字段名 新数据类型;</p>
+<p>14、修改字段类型</p>
+<p>例：对某字段进行修改   //column可以省略</p>
+<p>alter table 表名 modify column 字段名 新数据类型 新类型长度 新默认值 新注释;</p>
+<p>15、添加数据表字段</p>
+<p>alter table 表名 add 字段名 数据类型;</p>
+<p>16、删除数据表字段</p>
+<p>alter table 表名 drop 字段名;</p>
+<p>17、修改字段排序</p>
+<p>// 将此字段提到字段列表最前</p>
+<p>alter table 表名 modify 字段名 数据类型 first;  </p>
+<p>// 将此字段排在指定字段之后</p>
+<p>alter table 表名 modify 字段名 数据类型 after 字段名;  </p>
+<p>18、显示存储引擎</p>
+<p>show engines;</p>
+<p>19、更改存储引擎</p>
+<p>alter table 数据表名 engine=存储引擎;</p>
+<p>20、显示表使用的存储引擎</p>
+<p>show create table 数据表名;</p>
+<p>21、完全拷贝数据表</p>
+<p>create table if not exists 新数据表名 like 被拷贝的数据表名;</p>
+<p>22、部分拷贝数据表</p>
+<p>create table if not exists 新数据表名 as select 字段名,字段名 from 被拷贝的数据表名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/smartyman/p/3813999.html">MySQL中快速复制数据表方法汇总 - 我曾如此奢望 - 博客园 (cnblogs.com)</a></p>
+<p>23、查看索引</p>
+<p>show index from 表名；</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7364.html">MySQL查看索引（SHOW INDEX） (biancheng.net)</a></p>
+<p>24、查看表中的约束</p>
+<p>show create table 表名;</p>
+<p>25、非空约束</p>
+<p>// 创建表时设置非空约束</p>
+<p>create table 表名(字段名 数据类型 not null);</p>
+<p>// 修改表时添加非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 not null;</p>
+<p>// 删除非空约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2448.html">MySQL非空约束（NOT NULL） (biancheng.net)</a></p>
+<p>26、唯一约束</p>
+<p>// 创建表时设置唯一约束</p>
+<p>create table 表名(字段名 数据类型 not null unique );</p>
+<p>// 修改表时添加唯一约束</p>
+<p>alter table 表名 add constraint 唯一约束名 unique(字段名);</p>
+<p>// 删除唯一约束</p>
+<p>alter table 表名 drop index 唯一约束名;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2445.html">MySQL唯一约束（UNIQUE KEY） (biancheng.net)</a></p>
+<p>27、默认约束</p>
+<p>// 创建表时设置默认约束</p>
+<p>create table 表名(字段名 数据类型 default ‘默认值’);</p>
+<p>// 修改表时添加默认约束</p>
+<p>alter table 表名 change column 字段名 数据类型 default ‘默认值’;</p>
+<p>// 删除默认约束</p>
+<p>alter table 表名 change column 字段名 字段名 数据类型 default null;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2447.html">MySQL默认值（DEFAULT） (biancheng.net)</a></p>
+<p>28、主键约束</p>
+<p>// 创建表时设置主键约束</p>
+<p>① create table 表名(字段名 数据类型 primary key);</p>
+<p>② create table 表名(字段名 数据类型 ,primary key(主码));</p>
+<p>// 组合主键约束</p>
+<p>③ create table 表名(字段名 数据类型,primary key(主码,主码));</p>
+<p>// 添加主键约束</p>
+<p>alter table 表名 add primary key(主码);</p>
+<p>// 修改主键约束</p>
+<p>alter table 表名 drop primary key,add primary key(主码);</p>
+<p>// 删除主键约束</p>
+<p>alter table 表名 drop primary key;</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2440.html">MySQL主键（PRIMARY KEY） (biancheng.net)</a></p>
+<p>29、自增约束</p>
+<p>// 创建表时设置自增约束</p>
+<p>create table 表名(字段名 数据类型 约束条件 auto_increment);</p>
+<p>// 参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7624.html">MySQL AUTO_INCREMENT：主键自增长 (biancheng.net)</a></p>
+<p>30、外键约束</p>
+<p>定义外键时，需要遵守下列规则：</p>
+<ul>
+<li>主表必须已经存在于数据库中，或者是当前正在创建的表。如果是后一种情况，则主表与从表是同一个表，这样的表称为自参照表，这种结构称为自参照完整性。</li>
+<li>必须为主表定义主键。</li>
+<li>主键不能包含空值，但允许在外键中出现空值。也就是说，只要外键的每个非空值出现在指定的主键中，这个外键的内容就是正确的。</li>
+<li>在主表的表名后面指定列名或列名的组合。这个列或列的组合必须是主表的主键或候选键。</li>
+<li>外键中列的数目必须和主表的主键中列的数目相同。</li>
+<li>外键中列的数据类型必须和主表主键中对应列的数据类型相同。</li>
+</ul>
+<p>// 级联选项取值：cascade、set null、no action、restrict</p>
+<p>// 创建表时设置外键约束</p>
+<p>create table 表名(字段名 数据类型,字段名 数据类型,主键约束,constraint 约束条件名 foreign key(字段名) references 表名(主表主码));</p>
+<p>// 修改表时添加外键约束</p>
+<p>alter table 表名 add foreign key(主码) references 表名(主码) on update 级联选项值 on delete 级联选项值; </p>
+<p>// 删除外键约束</p>
+<p>alter table 表名 drop foreign key 外键约束名;</p>
+<p>// 参考教程：</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2441.html">MySQL外键约束（FOREIGN KEY） (biancheng.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yzuzhang/p/5174720.html">MySql 外键约束 之CASCADE、SET NULL、RESTRICT、NO ACTION分析和作用 - yzuzhang - 博客园 (cnblogs.com)</a></p>
+<p>31、插入数据</p>
+<p>insert into 表名(字段名1,字段名2…) values(值1,值2…);<br>insert into 表名 values(值1,值2…);</p>
+<p>32、更新数据</p>
+<p>update 表名 set 字段名1=值1,字段名2=值2… where 条件表达式;</p>
+<p>33、删除数据</p>
+<p>delete from 表名 where 条件表达式;</p>
+<p>34、查询数据</p>
+<p>select * from 表名;<br>select 字段名1,字段名2 from 表名;</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Nan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/">http://example.com/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Nan's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://riyugo.com/o/210508/x623hw.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://riyugo.com/o/210508/snbrni.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Nan</div><div class="author-info__description">身体健康第一，没什么值得熬夜</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/" title="MySQL命令行实用程序"><img src="https://riyugo.com/o/210508/x623hw.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL命令行实用程序"/></a><div class="content"><a class="title" href="/2021/04/26/MySQL%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F/" title="MySQL命令行实用程序">MySQL命令行实用程序</a><time datetime="2021-04-26T04:44:38.621Z" title="发表于 2021-04-26 12:44:38">2021-04-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Nan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'meow-8grx1cxjb6c199fd',
+      region: ''
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'meow-8grx1cxjb6c199fd',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'KcBnslwPYCpO0Cs0L15rBL3N-gzGzoHsz',
+      appKey: '6H8pQ30Qn4FFNYkoOuFlA5SA',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="6751229202" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'Meowmeow house/1001',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (true) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
